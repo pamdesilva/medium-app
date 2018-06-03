@@ -1,24 +1,20 @@
 import App from './App';
+import Home from './components/Home';
+import Login from './components/Login';
 import { Provider } from 'react-redux';
+import store from './store';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import { createStore } from 'redux';
-
-const defaultState = {
-  appName: 'conduit',
-  articles: null
-};
-
-const reducer = function(state = defaultState, action) {
-  return state;
-};
-
-const store = createStore(reducer);
-
 ReactDOM.render((
   <Provider store={store}>
-    <App />
+    <Router history={hashHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Home} />
+        <Route path="login" component={Login} />
+      </Route>
+    </Router>
   </Provider>
 ), document.getElementById('root'));
